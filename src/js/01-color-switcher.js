@@ -3,6 +3,24 @@ function getRandomHexColor() {
 }
 
 const start = document.querySelector('[data-start]');
-console.log(start);
 const stop = document.querySelector('[data-stop]');
-console.log(stop);
+
+start.addEventListener('click', changeBodyColor);
+stop.addEventListener('click', stopColorChange);
+stop.disabled = true;
+
+let interval;
+
+function changeBodyColor() {
+  interval = setInterval(() => {
+    document.body.style.backgroundColor = getRandomHexColor();
+    start.disabled = true;
+    stop.disabled = false;
+  }, 1000);
+}
+
+function stopColorChange() {
+  clearInterval(interval);
+  start.disabled = false;
+  stop.disabled = true;
+}
