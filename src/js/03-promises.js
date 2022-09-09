@@ -1,9 +1,9 @@
 import Notiflix from 'notiflix';
 
-btnRef = document.querySelector('.form');
-inpDelay = document.querySelector('input[name="delay"]');
-inpStep = document.querySelector('input[name="step"]');
-inpAmount = document.querySelector('input[name="amount"]');
+const btnRef = document.querySelector('.form');
+const inpDelay = document.querySelector('input[name="delay"]');
+const inpStep = document.querySelector('input[name="step"]');
+const inpAmount = document.querySelector('input[name="amount"]');
 
 function createPromise(position, delay) {
   return new Promise(function (resolve, reject) {
@@ -27,7 +27,7 @@ function onSubmit(event) {
         );
       })
       .catch(({ position, delay }) => {
-        Notiflix.Notify.success(
+        Notiflix.Notify.warning(
           `❌ Rejected promise ${position} in ${delay}ms`
         );
       });
