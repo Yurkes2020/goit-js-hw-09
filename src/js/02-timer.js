@@ -55,21 +55,23 @@ const options = {
 flatpickr(inputDate, options);
 
 function startTimer() {
-  setInterval(() => {
-    const { days, hours, minutes, seconds } = convertMs(
-      (countDownTimer = countDownTimer - 1000)
-    );
-    const strD = String(days);
-    const strH = String(hours);
-    const strM = String(minutes);
-    const strS = String(seconds);
+  start.disabled = true;
+  let timer = setInterval(() => {
+    countDownTimer = countDownTimer - 1000;
+    if (countDownTimer >= 0) {
+      const { days, hours, minutes, seconds } = convertMs(countDownTimer);
+      const strD = String(days);
+      const strH = String(hours);
+      const strM = String(minutes);
+      const strS = String(seconds);
 
-    daysRef.textContent = strD.length > 1 ? strD : addLeadingZero(strD);
-    hoursRef.textContent = strH.length > 1 ? strH : addLeadingZero(strH);
-    minutesRef.textContent = strM.length > 1 ? strM : addLeadingZero(strM);
-    secondsRef.textContent = strS.length > 1 ? strS : addLeadingZero(strS);
-
-    start.disabled = true;
+      daysRef.textContent = strD.length > 1 ? strD : addLeadingZero(strD);
+      hoursRef.textContent = strH.length > 1 ? strH : addLeadingZero(strH);
+      minutesRef.textContent = strM.length > 1 ? strM : addLeadingZero(strM);
+      secondsRef.textContent = strS.length > 1 ? strS : addLeadingZero(strS);
+    } else {
+      clearInterval(timer);
+    }
   }, 1000);
   Notiflix.Notify.success('GO GO GO');
 }
